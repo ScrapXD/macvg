@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-Y71QM9DR66"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-Y71QM9DR66");
+    </script>
     <title class="cloak">Settings | MacVG</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link
-      class="favicon"
-      rel="icon"
-      type="image/x-icon"
-      href="/logo.png"
-    />
+    <link class="favicon" rel="icon" type="image/x-icon" href="/logo.png" />
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link
       rel="stylesheet"
@@ -56,25 +65,13 @@
           <a href="/macblog/projects/macvg/" target="_blank">About</a>
           <a href="/macblog/updates/macvg/" target="_blank">Updates</a>
           <a href="/macblog/projects/macvg/" target="_blank">Docs</a>
-          <a href="https://forms.gle/UpHgbAmLtUPCD5bs8" target="_blank">Feedback</a>
+          <a href="https://forms.gle/UpHgbAmLtUPCD5bs8" target="_blank"
+            >Feedback</a
+          >
         </ul>
       </div>
     </nav>
-    <div class="announce">
-      <h2>
-        Check out the
-        <a href="/macblog/updates/macvg/2024/march.html" target="_blank"
-          >MacVG March Update</a
-        >: New features, new looks, and more!
-        <img src="/maclearn/xmark-solid.svg" alt="X" id="closea" />
-      </h2>
-    </div>
-    <script>
-      let clos = document.getElementById("closea");
-      if (localStorage.getItem("macvgclosee")) {
-        clos.parentElement.parentElement.style.display = "none";
-      }
-    </script>
+    
     <div class="macsidebar" id="sidebar">
       <a href="/"><img src="/logo.png" alt="" /></a>
       <a href="/maclearn/"><img src="/MacLearn Logo.png" alt="" /></a>
@@ -84,7 +81,7 @@
     </div>
     <div class="wrap" style="padding-bottom: 40px" id="wrap">
       <header class="homeheader">
-        <div class="title">Settings</div>
+        <div class="title" name="Settings">Settings</div>
         <div
           class="sub"
           style="
@@ -94,15 +91,49 @@
             line-height: 30px;
           "
         >
-          You can select a cloaker to change the browser tab so teachers won't notice, select the theme you love for a personalized gaming experience, and also set a  panic button that when a teacher comes, MacVG will quickly redirect to your desired website!
+          You can select a cloaker to change the browser tab so teachers won't
+          notice, select the theme you love for a personalized gaming
+          experience, and also set a panic button that when a teacher comes,
+          MacVG will quickly redirect to your desired website!
         </div>
       </header>
       <hr />
       <section>
+        <h2 style="display: flex; align-items: center; justify-content: center">
+          About:blank Embedder <span class="new">NEW</span>
+        </h2>
+        <p
+          class="sub"
+          style="
+            width: 50%;
+            margin-inline: 25%;
+            margin-bottom: 20px;
+            font-size: 20px;
+          "
+        >
+          Open a website in an about:blank page so it doesn't show up in
+          history!
+        </p>
+        <form id="cloaker">
+          <input
+            type="text"
+            id="name5"
+            placeholder="Enter the embed URL here!"
+          />
+          <button onclick="embed()" id="go" type="submit">Go!</button>
+        </form>
         <h2>Cloaker</h2>
-        <form action="" id="cloaker">
-          <input type="text" id="name" placeholder="Rename the tab!" />
+        <form id="cloaker">
+          <input type="text" id="name" placeholder="Enter tab name here!" />
           <button onclick="cloaking()" id="go" type="submit">Go!</button>
+        </form>
+        <form action="" id="cloaker">
+          <input
+            type="text"
+            id="name4"
+            placeholder="Enter tab image URL here!"
+          />
+          <button onclick="faviconing()" id="go" type="submit">Go!</button>
         </form>
         <form action="" id="clform">
           <button onclick="google1()" class="clbtn">Google</button>
@@ -113,15 +144,34 @@
           <button onclick="unCloak()" class="clbtn">Uncloak</button>
         </form>
         <h2>Themes</h2>
-        <form action="" id="clform">
+        <form action="" id="clform" style="position: relative">
           <button onclick="dark()" class="clbtn">Dark</button>
           <button onclick="ddark()" class="clbtn">Deep Dark</button>
+          <button onclick="cyber()" class="clbtn">Cyberpunk</button>
           <button onclick="light()" class="clbtn">Light</button>
-          <button onclick="holidays()" class="clbtn" style="cursor: not-allowed; background-color: gray;">Holidays</button>
+          <button
+            onclick="holidays()"
+            class="clbtn"
+            style="cursor: not-allowed; background-color: gray"
+          >
+            Holidays
+          </button>
+          <button onclick="create()" class="clbtn" id="custombtn">
+            Custom
+          </button>
+          <div id="custom">
+            <div class="containercustom">
+              <input type="color" name="color1" id="color1" value="#636363" />
+              <label for="color1">Main Color</label>
+            </div>
+            <div class="containercustom">
+              <input type="color" name="color2" id="color2" value="#262626" />
+              <label for="color2">Accent Color</label>
+            </div>
+          </div>
         </form>
         <h2>Panic Button</h2>
         <p id="pbdescription">
-          Only type one character for the panic key.<br />
           <spam id="current"></spam>
         </p>
         <form action="" id="cloaker2">
@@ -129,10 +179,11 @@
           <button onclick="panic()" id="go2" type="submit">Go!</button>
         </form>
         <form action="" id="cloaker2" style="margin-top: 0">
+          <span class="prehold">https://</span>
           <input
             type="text"
             id="name3"
-            placeholder="https:// required! Enter the panic redirecting link here!"
+            placeholder="Enter the panic redirecting link here!"
           />
           <button onclick="url()" id="go2" type="submit">Go!</button>
         </form>
@@ -166,5 +217,80 @@
         >More games!</a
       >
     </footer>
+    <script>
+      const allForms = document.querySelectorAll("form");
+      allForms.forEach((form) => {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+        });
+      });
+      const urlt = document.getElementById("name5");
+      const urlObj = new window.URL(window.location.href);
+      function embed() {
+        if (
+          !urlt.value.startsWith("https://") &&
+          !urlt.value.startsWith("http://")
+        ) {
+          urlt.value = `https://${urlt.value.split("https://").pop()}`;
+        } else if (urlt.value.startsWith("http://")) {
+          urlt.value = `https://${urlt.value.split("http://").pop()}`;
+        }
+        const win = window.open();
+        win.document.body.style.margin = "0";
+        win.document.body.style.height = "100vh";
+        const iframe = win.document.createElement("iframe");
+        iframe.style.border = "none";
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.margin = "0";
+        iframe.referrerpolicy = "no-referrer";
+        iframe.allow = "fullscreen";
+        iframe.src = urlt.value;
+        win.document.body.appendChild(iframe);
+      }
+
+      const custom = document.getElementById("custom");
+      const first = document.getElementById("color1");
+      const second = document.getElementById("color2");
+      let custom1 = localStorage.getItem("first");
+      let custom2 = localStorage.getItem("second");
+      if (custom1) {
+        first.value = custom1;
+      }
+      if (custom2) {
+        second.value = custom2;
+      }
+      function create() {
+        custom.style.visibility = "visible";
+        custom.style.opacity = "1";
+        document.addEventListener("click", (e) => {
+          console.log(e.target.getAttribute("id"));
+          if (
+            e.target.getAttribute("id") != "custombtn" &&
+            e.target != custom &&
+            e.target != first &&
+            e.target != second
+          ) {
+            custom.style.opacity = "0";
+            custom.style.visibility = "hidden";
+            document.documentElement.style.setProperty(
+              "--bg-color",
+              first.value
+            );
+            document.documentElement.style.setProperty(
+              "--bg-color-2",
+              second.value
+            );
+            localStorage.setItem("theme", "custom");
+            localStorage.setItem("first", first.value);
+            localStorage.setItem("second", second.value);
+          } else {
+            custom.style.opacity = "1";
+            custom.style.visibility = "visible";
+          }
+        });
+      }
+      // TODO: put this code releated in app.js in the projects folder*/
+    </script>
   </body>
 </html>

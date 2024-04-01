@@ -9,3 +9,8 @@ function ddark() {
 function light() {
   localStorage.setItem("theme", "light");
 }
+
+function cyber() {
+  localStorage.setItem("theme", "cyber");
+}
+

@@ -30,42 +30,130 @@ const schoology = ["Home | Schoology", "/macvg/schoology.png"];
 const newTab = ["New Tab", "/macvg/new-tab.png"];
 
 function google1() {
-  localStorage.setItem("title", JSON.stringify(google));
+  localStorage.setItem("title", google);
 }
 
 function canva1() {
-  localStorage.setItem("title", JSON.stringify(canva));
+  localStorage.setItem("title", canva);
 }
 
 function clever1() {
-  localStorage.setItem("title", JSON.stringify(clever));
+  localStorage.setItem("title", clever);
 }
 
 function schoology1() {
-  localStorage.setItem("title", JSON.stringify(schoology));
+  localStorage.setItem("title", schoology);
 }
 
 function newTab1() {
-  localStorage.setItem("title", JSON.stringify(newTab));
+  localStorage.setItem("title", newTab);
 }
 
 function unCloak() {
+  const pageTon = document.querySelector(".cloak");
+  const favicon = document.querySelector(".favicon");
+  favicon.outerHTML = `<link class="favicon" rel="icon" type="image/x-icon" href="/macvg/logo.png" />`;
+  pageTon.innerHTML = "Settings | MacVG";
   localStorage.setItem("title", "");
 }
 
 function panic() {
   const button = document.getElementById("name2").value;
   localStorage.setItem("panic", button);
+  let thing23 = document.getElementById("current");
+  let panicKeys = localStorage.getItem("panic");
+  let href = localStorage.getItem("href");
+  if (panicKeys && href) {
+    thing23.innerHTML =
+      `<div class="panickeys">` +
+      "<div>" +
+      "Current key: " +
+      panicKeys +
+      "</div>" +
+      "<div>" +
+      " Redirecting: " +
+      href +
+      "</div>" +
+      "</div>";
+  } else if (panicKeys) {
+    thing23.innerHTML =
+      `<div class="panickeys">` +
+      "<div>" +
+      "Current key: " +
+      panicKeys +
+      "</div>" +
+      "<div>" +
+      " Redirecting: https://google.com" +
+      "</div>" +
+      "</div>";
+  } else {
+    thing23.innerHTML =
+      `<div class="panickeys">` +
+      "<div>" +
+      "Current key: `" +
+      "</div>" +
+      "<div>" +
+      " Redirecting: https://google.com" +
+      "</div>" +
+      "</div>";
+  }
 }
 
 function url() {
   const inputurl = document.getElementById("name3").value;
-  localStorage.setItem("href", inputurl);
+  localStorage.setItem("href", "https://" + inputurl);
+  let thing23 = document.getElementById("current");
+  let panicKeys = localStorage.getItem("panic");
+  let href = localStorage.getItem("href");
+  if (panicKeys && href) {
+    thing23.innerHTML =
+      `<div class="panickeys">` +
+      "<div>" +
+      "Current key: " +
+      panicKeys +
+      "</div>" +
+      "<div>" +
+      " Redirecting: " +
+      href +
+      "</div>" +
+      "</div>";
+  } else if (panicKeys) {
+    thing23.innerHTML =
+      `<div class="panickeys">` +
+      "<div>" +
+      "Current key: " +
+      panicKeys +
+      "</div>" +
+      "<div>" +
+      " Redirecting: https://google.com" +
+      "</div>" +
+      "</div>";
+  } else {
+    thing23.innerHTML =
+      `<div class="panickeys">` +
+      "<div>" +
+      "Current key: `" +
+      "</div>" +
+      "<div>" +
+      " Redirecting: https://google.com" +
+      "</div>" +
+      "</div>";
+  }
 }
 
 function cloaking() {
   const name = document.getElementById("name").value;
-  localStorage.title = name;
+  const favicon = document.querySelector(".favicon");
+  localStorage.title = name + "," + favicon.href;
+}
+
+function faviconing() {
+  const pageTon = document.querySelector(".cloak");
+  const favicon = document.querySelector(".favicon");
+  const faviSRC = document.getElementById("name4").value;
+  let thingy = [pageTon.innerHTML, faviSRC];
+  favicon.outerHTML = `<link class="favicon" rel="icon" type="image/x-icon" href="${faviSRC}" />`;
+  localStorage.setItem("title", thingy);
 }
 
 function changeName() {
@@ -74,43 +162,57 @@ function changeName() {
     const favicon = document.querySelector(".favicon");
     if (localStorage.title != null) {
       let all = localStorage.getItem("title");
-      if (
-        all.includes("Clever") ||
-        all.includes("Google") ||
-        all.includes("Canva") ||
-        all.includes("Schoology") ||
-        all.includes("New Tab")
-      ) {
-        let alln = JSON.parse(all);
-        let title = alln[0];
-        let image = alln[1];
-        pageTon.innerHTML = title;
-        favicon.outerHTML = `<link class="favicon" rel="icon" type="image/x-icon" href="${image}" />`;
-      } else {
-        pageTon.innerHTML = all;
-      }
+      let alln = all.split(",");
+      let title = alln[0];
+      let image = alln[1];
+      pageTon.innerHTML = title;
+      favicon.outerHTML = `<link class="favicon" rel="icon" type="image/x-icon" href="${image}" />`;
     }
   }
 }
 setInterval(changeName, 100);
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function load() {
   const close = document.getElementById("closea");
   close.addEventListener("click", function () {
     close.parentElement.parentElement.style.display = "none";
-    localStorage.setItem("macvgclosee", "closed");
+    localStorage.setItem("macvgcloseeee", "closed");
   });
   let thing23 = document.getElementById("current");
-    let panicKeys = localStorage.getItem("panic");
-    let href = localStorage.getItem("href");
-    if (panicKeys && href) {
-      thing23.innerHTML =
-      "Current key: " + panicKeys + "<br>" + " Redirecting: " + href;
-    } else if (panicKeys) {
-      thing23.innerHTML =
-      "Current key: " + panicKeys + "<br>" + " Redirecting: https://google.com";
-    } else {
-      thing23.innerHTML =
-      "Current key: `" + "<br>" + " Redirecting: https://google.com";
-    }
+  let panicKeys = localStorage.getItem("panic");
+  let href = localStorage.getItem("href");
+  if (panicKeys && href) {
+    thing23.innerHTML =
+      `<div class="panickeys">` +
+      "<div>" +
+      "Current key: " +
+      panicKeys +
+      "</div>" +
+      "<div>" +
+      " Redirecting: " +
+      href +
+      "</div>" +
+      "</div>";
+  } else if (panicKeys) {
+    thing23.innerHTML =
+      `<div class="panickeys">` +
+      "<div>" +
+      "Current key: " +
+      panicKeys +
+      "</div>" +
+      "<div>" +
+      " Redirecting: https://google.com" +
+      "</div>" +
+      "</div>";
+  } else {
+    thing23.innerHTML =
+      `<div class="panickeys">` +
+      "<div>" +
+      "Current key: `" +
+      "</div>" +
+      "<div>" +
+      " Redirecting: https://google.com" +
+      "</div>" +
+      "</div>";
+  }
 });

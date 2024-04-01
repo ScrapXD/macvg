@@ -7,6 +7,10 @@
   --group-bg-color: rgba(40, 40, 40, 0.7);
   --bar-color: rgb(70, 70, 70);
   --border: transparent;
+  --f-t-color: rgb(228, 70, 8);
+  --s-t-color: rgb(177, 228, 8);
+  --t-t-color: rgb(255, 255, 255);
+  --link: rgb(225, 139, 9);
 }
 
 * {
@@ -14,6 +18,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: background-color 0.35s ease;
+}
+
+.panickeys {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 body {
@@ -135,13 +146,13 @@ body {
   transform: translateX(-50%);
   width: 0px;
   margin: 0;
-  background-color: rgb(225, 139, 9);
+  background-color: var(--link);
   transition: width 0.15s ease;
 }
 
 #cats a:hover::after {
   width: 50%;
-  background-color: rgb(225, 139, 9);
+  background-color: var(--link);
   transition: width 0.2s ease;
 }
 
@@ -204,8 +215,36 @@ body {
 }
 
 .title {
+  transition: background 0.2s ease;
   font-size: 35px;
   font-weight: bold;
+  background: linear-gradient(
+    to right,
+    var(--f-t-color),
+    var(--s-t-color),
+    var(--t-t-color)
+  );
+  background-clip: text;
+  z-index: 30;
+  -webkit-text-fill-color: transparent;
+}
+.title::before {
+  content: attr(name);
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  top: 65px;
+  height: 10%;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--f-t-color),
+    var(--s-t-color),
+    var(--t-t-color)
+  );
+  position: absolute;
+  background-clip: text;
+  filter: blur(15px);
 }
 
 #favoriteList .game {
@@ -227,6 +266,11 @@ body {
   width: 49%;
   margin-right: 1%;
   list-style-type: none;
+}
+
+.prehold {
+  background-color: var(--bar-color);
+  color: white;
 }
 
 .groups:last-child {
@@ -366,9 +410,69 @@ label:hover {
   flex: 1 0 100% !important;
 }
 
+#custom {
+  position: absolute;
+  right: -55px;
+  background-color: black;
+  top: -80px;
+  width: 220px;
+  border-radius: 10px;
+  padding-block: 8px;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  transition: opacity 0.3s ease;
+  justify-content: center;
+}
+
+.containercustom {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.containercustom label {
+  font-size: 15px;
+  padding-inline: 10px;
+  padding-block: 0;
+  padding-top: 8px;
+}
+
+#custom input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 50px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#custom input::-webkit-color-swatch {
+  border-radius: 5px;
+  border: none;
+}
+#custom input::-moz-color-swatch {
+  border-radius: 5px;
+  border: none;
+}
+
 .sub {
   font-size: 20px;
   padding: 20px;
+  color: var(--text-color);
+}
+
+.new {
+  background-color: var(--link);
+  font-size: 18px;
+  padding-inline: 10px;
+  padding-block: 5px;
+  border-radius: 5px;
+  margin-left: 20px;
 }
 
 .nav {
@@ -406,13 +510,13 @@ label:hover {
   transform: translateX(-50%);
   width: 0px;
   margin: 0;
-  background-color: rgb(225, 139, 9);
+  background-color: var(--link);
   transition: width 0.15s ease;
 }
 
 .nav-link:hover::after {
   width: 80%;
-  background-color: rgb(225, 139, 9);
+  background-color: var(--link);
   transition: width 0.2s ease;
 }
 
@@ -475,7 +579,10 @@ h2 {
 
 #name,
 #name2,
-#name3 {
+#name3,
+#name4,
+#name5,
+.prehold {
   outline: none;
   border: 2px solid var(--border);
   padding-inline: 2.5%;
@@ -484,10 +591,21 @@ h2 {
   color: var(--text-color);
   font-size: 18px;
   border-radius: 12px 0px 0px 12px;
-  width: 90%;
+  width: 85%;
   height: 100%;
   margin-bottom: 0px;
   transition: border 0.5s ease;
+}
+
+#name3 {
+  border-radius: 0;
+  width: 72%;
+}
+
+.prehold {
+  text-align: center;
+  width: 13%;
+  border-right: 2px solid gray;
 }
 
 .footer {
@@ -513,7 +631,9 @@ h2 {
 
 #name:focus,
 #name2:focus,
-#name3:focus {
+#name3:focus,
+#name4:focus,
+#name5:focus {
   border: 2px solid rgb(100, 100, 100);
 }
 
@@ -719,8 +839,9 @@ h2 {
 
 .announce {
   background-color: rgb(30, 30, 30);
-  position: sticky;
-  padding-block: 11.5px;
+  position: fixed;
+  padding-block: 5px;
+  width: 100%;
   top: 46.5px;
   z-index: 100;
 }
@@ -755,12 +876,13 @@ h2 {
   left: -150%;
   width: 90px;
   height: 80%;
-  background-color: black;
+  background-color: var(--bg-color);
   opacity: 0.6;
   padding-inline: 10px;
   padding-block: 12px;
   transition: 0.3s;
   display: flex;
+  color: white;
   justify-content: center;
   align-items: end;
   font-size: 14px;
